@@ -1,10 +1,22 @@
 // import './App.css';
-import Board from './component/board';
+import { useState } from 'react';
 import './styles.scss';
 function App() {
+  const [curren, setcurren] = useState(0);
+
+  const onbtclick = event => {
+    console.log('hello', event);
+    setcurren(curren + 1);
+  };
+
   return (
     <div className="app">
-      <Board />
+      <div>
+        <button onClick={onbtclick}>click me</button>
+        <div>
+          <h1>{curren}</h1>
+        </div>
+      </div>
     </div>
   );
 }
