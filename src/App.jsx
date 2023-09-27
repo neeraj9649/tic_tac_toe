@@ -2,6 +2,7 @@ import Board from './component/board';
 import './styles.scss';
 import { useState } from 'react';
 import { calculateWinner } from './Winner';
+import StatusMessage from './component/statusmessage';
 
 function App() {
   const [squares, setsquares] = useState(Array(9).fill(null));
@@ -9,9 +10,6 @@ function App() {
 
   // const winner = calculateWinner(squares);
   const Winner = calculateWinner(squares);
-  console.log(Winner);
-  const nextPlayer = isXNext ? 'The next is X' : 'The next is O';
-  const currstatus = Winner ? `Winner is ${Winner}` : nextPlayer;
   const handlesquareclick = clickedposition => {
     // if the square is already filld (checking)
     if (squares[clickedposition] || Winner) {
@@ -30,7 +28,8 @@ function App() {
   return (
     <div className="app">
       <h1>Tic Tac Toe</h1>
-      <h2>{currstatus}</h2>
+      {/* <h2>{currstatus}</h2> */}
+      <StatusMessage isXNext={isXNext} Winner={Winner} squares={squares} />
       <Board squares={squares} handlesquareclick={handlesquareclick} />
     </div>
   );
