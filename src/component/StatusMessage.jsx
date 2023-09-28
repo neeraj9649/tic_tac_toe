@@ -8,6 +8,7 @@ const StatusMessage = ({ Winner, gamingBoard }) => {
   //   console.log(nextPlayer);
   const renderStatusMessage = () => {
     if (Winner) {
+      // console.log('function called 1');
       return (
         <>
           Winner is {''}
@@ -19,6 +20,7 @@ const StatusMessage = ({ Winner, gamingBoard }) => {
     }
 
     if (!Winner && noMoveLeft) {
+      // console.log('function called');
       return (
         <>
           <span className="text-orange">The match is draw</span>

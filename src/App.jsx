@@ -13,15 +13,18 @@ function App() {
   const [currentMove, setCurrentMove] = useState(0);
   const gamingBoard = history[currentMove];
   // const winner = calculateWinner(squares);
-  const Winner = calculateWinner(gamingBoard.squares);
+  // comming the value of Winner form the winner.js
+  const { Winner, winningSquares } = calculateWinner(gamingBoard.squares);
+  // this funciton handle the clicking of the square boxes
   const handlesquareclick = clickedposition => {
     // if the square is already filld (checking)
+    // console.log(Winner);
     if (gamingBoard.squares[clickedposition] || Winner) {
       return;
     }
     setHistory(currentHistory => {
       const isTraversing = currentMove + 1 !== currentHistory.length;
-      console.log({ isTraversing, currentMove });
+      // console.log({ isTraversing, currentMove });
       const lastGamingState = isTraversing
         ? currentHistory[currentMove]
         : history[history.length - 1];
@@ -60,11 +63,13 @@ function App() {
       <Board
         squares={gamingBoard.squares}
         handlesquareclick={handlesquareclick}
+        winningSquares={winningSquares}
       />
       <button
         className={`btn-reset ${Winner ? 'active' : ''}`}
         type="button"
         onClick={startNewGame}
+        // winningSquares={winningSquares}
       >
         Start new game
       </button>
