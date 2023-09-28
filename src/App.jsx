@@ -5,12 +5,11 @@ import Board from './component/board';
 import StatusMessage from './component/statusmessage';
 import './styles.scss';
 
+const NEW_GAME = [{ squares: Array(9).fill(null), isXNext: false }];
 function App() {
   // const [squares, setsquares] = useState(Array(9).fill(null));
   // const [isXNext, setisXNext] = useState(true);
-  const [history, setHistory] = useState([
-    { squares: Array(9).fill(null), isXNext: false },
-  ]);
+  const [history, setHistory] = useState(NEW_GAME);
   const [currentMove, setCurrentMove] = useState(0);
   const gamingBoard = history[currentMove];
   // const winner = calculateWinner(squares);
@@ -45,6 +44,10 @@ function App() {
     });
     setCurrentMove(Move => Move + 1);
   };
+  const startNewGame = () => {
+    setHistory(NEW_GAME);
+    setCurrentMove(0);
+  };
   const moveTo = move => {
     // console.log('check');
     setCurrentMove(move);
@@ -58,6 +61,13 @@ function App() {
         squares={gamingBoard.squares}
         handlesquareclick={handlesquareclick}
       />
+      <button
+        className={`btn-reset ${Winner ? 'active' : ''}`}
+        type="button"
+        onClick={startNewGame}
+      >
+        Start new game
+      </button>
       <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
